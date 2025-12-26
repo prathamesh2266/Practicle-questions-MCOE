@@ -1,0 +1,86 @@
+// Question 6:
+// Write a C++ program to maintain club members’ information using singly linked lists.
+// Store student PRN, Name and A.Y.
+// Write functions to compute the total number of members of the club.
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+struct Node {
+    int prn;
+    string name;
+    string ay;
+    Node* next;
+};
+
+Node* head = NULL;
+
+// Add member at end
+void addMember(int prn, string name, string ay) {
+    Node* newNode = new Node();
+    newNode->prn = prn;
+    newNode->name = name;
+    newNode->ay = ay;
+    newNode->next = NULL;
+
+    if (head == NULL) {
+        head = newNode;
+        return;
+    }
+
+    Node* temp = head;
+    while (temp->next != NULL)
+        temp = temp->next;
+
+    temp->next = newNode;
+}
+
+// Count total members
+int countMembers() {
+    int count = 0;
+    Node* temp = head;
+    while (temp != NULL) {
+        count++;
+        temp = temp->next;
+    }
+    return count;
+}
+
+// Display list
+void display() {
+    Node* temp = head;
+    while (temp != NULL) {
+        cout << temp->prn << " "
+             << temp->name << " "
+             << temp->ay << endl;
+        temp = temp->next;
+    }
+}
+
+int main() {
+    int prn, choice;
+    string name, ay;
+
+    do {
+        cin >> choice;
+        if (choice == 1) {
+            cin >> prn >> name >> ay;
+            addMember(prn, name, ay);
+        }
+    } while (choice != 0);
+
+    display();
+    cout << "Total Members: " << countMembers();
+
+    return 0;
+}
+
+/*
+Explanation:
+- Singly linked list is used to store club members’ information.
+- Each node contains PRN, Name, Academic Year, and a next pointer.
+- addMember() inserts a new member at the end of the list.
+- countMembers() traverses the list and counts the total number of nodes.
+- The total count represents the total number of club members.
+*/

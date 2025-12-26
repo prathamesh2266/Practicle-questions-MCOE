@@ -1,0 +1,50 @@
+# ============================================================
+# Question 15:
+# Develop an elementary Hotel Room Booking Chatbot.
+# ============================================================
+
+def hotel_booking_chatbot():
+    print("=" * 50)
+    print("🏨 Welcome to Grand Stay Hotel Chatbot")
+    print("=" * 50)
+
+    booking_confirmed = False
+
+    while True:
+        print("\nPlease choose an option:")
+        print("1. Check Room Availability")
+        print("2. Book a Room")
+        print("3. Cancel Booking")
+        print("4. Exit")
+
+        choice = input("Enter your choice (1-4): ")
+
+        if choice == "1":
+            print("\n🛏️ Available Rooms:")
+            print("1. Single Room - $100 per night")
+            print("2. Double Room - $180 per night")
+            print("3. Suite - $300 per night")
+
+        elif choice == "2":
+            room_type = input("Enter room type (Single / Double / Suite): ")
+            nights = int(input("Number of nights: "))
+            booking_confirmed = True
+            print(f"\n✅ {room_type} room booked for {nights} night(s).")
+
+        elif choice == "3":
+            if booking_confirmed:
+                booking_confirmed = False
+                print("\n❌ Your room booking has been cancelled.")
+            else:
+                print("\n⚠️ No active booking found.")
+
+        elif choice == "4":
+            print("\n🙏 Thank you for choosing Grand Stay Hotel.")
+            print("Have a pleasant stay!")
+            break
+
+        else:
+            print("\n❌ Invalid choice. Please try again.")
+
+# Run chatbot
+hotel_booking_chatbot()

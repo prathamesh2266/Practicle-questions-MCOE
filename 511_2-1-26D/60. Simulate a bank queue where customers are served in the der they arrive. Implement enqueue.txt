@@ -1,0 +1,77 @@
+// Question 60:
+// Simulate a bank queue where customers are served in the order they arrive.
+// Implement enqueue and dequeue operations.
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+struct Node {
+    string customer;
+    Node* next;
+};
+
+Node* front = NULL;
+Node* rear = NULL;
+
+// Enqueue operation (add customer)
+void enqueue(string name) {
+    Node* newNode = new Node();
+    newNode->customer = name;
+    newNode->next = NULL;
+
+    if (rear == NULL) {
+        front = rear = newNode;
+        return;
+    }
+
+    rear->next = newNode;
+    rear = newNode;
+}
+
+// Dequeue operation (serve customer)
+void dequeue() {
+    if (front == NULL) {
+        cout << "Queue is empty" << endl;
+        return;
+    }
+
+    Node* temp = front;
+    cout << "Served Customer: " << temp->customer << endl;
+    front = front->next;
+
+    if (front == NULL)
+        rear = NULL;
+
+    delete temp;
+}
+
+// Display queue
+void display() {
+    Node* temp = front;
+    while (temp != NULL) {
+        cout << temp->customer << " ";
+        temp = temp->next;
+    }
+    cout << endl;
+}
+
+int main() {
+    enqueue("Customer1");
+    enqueue("Customer2");
+    enqueue("Customer3");
+
+    display();
+    dequeue();
+    display();
+
+    return 0;
+}
+
+/*
+Explanation:
+- Bank queue is implemented using a singly linked list.
+- enqueue() adds a customer at the rear of the queue.
+- dequeue() removes a customer from the front (FIFO order).
+- Customers are served in the order they arrive.
+*/

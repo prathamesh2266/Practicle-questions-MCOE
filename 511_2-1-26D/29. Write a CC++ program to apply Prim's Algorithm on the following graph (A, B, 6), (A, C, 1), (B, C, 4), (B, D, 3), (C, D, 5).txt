@@ -1,0 +1,38 @@
+// Question 29:
+// Apply Prim’s Algorithm.
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int cost[4][4] = {
+        {0,6,1,0},
+        {6,0,4,3},
+        {1,4,0,5},
+        {0,3,5,0}
+    };
+
+    int visited[4] = {1,0,0,0};
+    int mincost = 0;
+
+    for (int e = 0; e < 3; e++) {
+        int min = 999, x = 0, y = 0;
+        for (int i = 0; i < 4; i++)
+            if (visited[i])
+                for (int j = 0; j < 4; j++)
+                    if (!visited[j] && cost[i][j] && cost[i][j] < min) {
+                        min = cost[i][j];
+                        x = i; y = j;
+                    }
+        visited[y] = 1;
+        mincost += min;
+    }
+
+    cout << mincost;
+    return 0;
+}
+
+/*
+Explanation:
+- Greedy MST using Prim’s Algorithm.
+*/

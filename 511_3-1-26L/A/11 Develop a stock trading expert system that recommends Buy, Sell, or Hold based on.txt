@@ -1,0 +1,50 @@
+# ============================================================
+# Question 11:
+# Develop a stock trading expert system.
+# ============================================================
+
+def stock_trading_expert_system():
+    print("=" * 50)
+    print("📊 Stock Trading Expert System")
+    print("=" * 50)
+
+    # User input
+    prices = list(map(float, input("Enter stock prices (space-separated): ").split()))
+
+    if len(prices) < 3:
+        print("⚠️ Not enough data to make a decision.")
+        return
+
+    latest_price = prices[-1]
+    previous_price = prices[-2]
+    average_price = sum(prices) / len(prices)
+
+    print("\nPrice Analysis:")
+    print("Prices:", prices)
+    print("Latest Price:", latest_price)
+    print("Previous Price:", previous_price)
+    print("Average Price:", round(average_price, 2))
+
+    # Expert system rules
+    if latest_price > previous_price and latest_price > average_price:
+        decision = "STRONG BUY"
+        reason = "Price is rising and above average."
+    elif latest_price > previous_price:
+        decision = "BUY"
+        reason = "Price is rising."
+    elif latest_price < previous_price and latest_price < average_price:
+        decision = "STRONG SELL"
+        reason = "Price is falling and below average."
+    elif latest_price < previous_price:
+        decision = "SELL"
+        reason = "Price is falling."
+    else:
+        decision = "HOLD"
+        reason = "Price is stable."
+
+    print("\n📌 Expert Decision:", decision)
+    print("🧠 Reason:", reason)
+
+
+# Run the expert system
+stock_trading_expert_system()

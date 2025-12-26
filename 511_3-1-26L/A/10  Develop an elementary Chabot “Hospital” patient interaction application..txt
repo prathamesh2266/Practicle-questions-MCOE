@@ -1,0 +1,57 @@
+# ============================================================
+# Question 10:
+# Develop an elementary Hospital Chatbot.
+# ============================================================
+
+def hospital_chatbot():
+    print("=" * 50)
+    print("🏥 Welcome to City Hospital Chatbot")
+    print("=" * 50)
+    print("How can I help you today?")
+    
+    while True:
+        print("\nPlease choose an option:")
+        print("1. Book an Appointment")
+        print("2. Doctor Availability")
+        print("3. Emergency Services")
+        print("4. Hospital Timings")
+        print("5. Contact Information")
+        print("6. Exit")
+        
+        choice = input("\nEnter your choice (1-6): ")
+
+        if choice == "1":
+            print("\n📅 Appointments are available from 9 AM to 5 PM (Mon–Fri).")
+            print("📞 Call 123-456-7890 to book an appointment.")
+
+        elif choice == "2":
+            print("\n👨‍⚕️ Specialist Doctors Available:")
+            print("- Cardiologist")
+            print("- Neurologist")
+            print("- Orthopedic")
+            print("- Pediatrician")
+
+        elif choice == "3":
+            print("\n🚑 Emergency services are available 24/7.")
+
+        elif choice == "4":
+            print("\n⏰ Hospital Timings:")
+            print("Monday to Friday: 9 AM – 8 PM")
+            print("Saturday: 9 AM – 2 PM")
+            print("Sunday: Closed (Emergency Open)")
+
+        elif choice == "5":
+            print("\n📍 Contact Information:")
+            print("Phone: 123-456-7890")
+            print("Email: info@cityhospital.com")
+
+        elif choice == "6":
+            print("\n🙏 Thank you for using City Hospital Chatbot.")
+            print("Stay healthy!")
+            break
+
+        else:
+            print("\n❌ Invalid choice. Please enter a number between 1 and 6.")
+
+# Run the chatbot
+hospital_chatbot()

@@ -1,0 +1,46 @@
+# ============================================================
+# Question 6:
+# You are developing an expert system.
+# Facts are nodes and logical implications are edges.
+# Implement BFS to find new facts.
+# ============================================================
+
+
+from collections import deque
+
+def infer_facts_bfs(knowledge_base, initial_fact):
+    print("=" * 50)
+    print("🧠 Expert System Inference (BFS)")
+    print("=" * 50)
+
+    queue = deque([initial_fact])
+    known_facts = set([initial_fact])
+    inferred_order = []
+
+    while queue:
+        current_fact = queue.popleft()
+        inferred_order.append(current_fact)
+
+        for inferred_fact in knowledge_base.get(current_fact, []):
+            if inferred_fact not in known_facts:
+                known_facts.add(inferred_fact)
+                queue.append(inferred_fact)
+
+    print("\n📌 Inference Order:")
+    for fact in inferred_order:
+        print("✔", fact)
+
+    print("\n✅ Final Set of Known Facts:")
+    print(known_facts)
+
+
+# Knowledge base (facts → implications)
+facts_graph = {
+    "Fever": ["Flu"],
+    "Flu": ["Cold"],
+    "Cold": ["Cough"],
+    "Cough": ["Chest Infection"]
+}
+
+# Start inference
+infer_facts_bfs(facts_graph, "Fever")

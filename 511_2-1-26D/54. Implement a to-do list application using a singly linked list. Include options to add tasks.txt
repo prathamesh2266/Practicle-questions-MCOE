@@ -1,0 +1,65 @@
+// Question 54:
+// Implement a to-do list application using a singly linked list.
+// Include options to add tasks.
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+struct Task {
+    string name;
+    Task* next;
+};
+
+Task* head = NULL;
+
+// Add task at end
+void addTask(string taskName) {
+    Task* newTask = new Task();
+    newTask->name = taskName;
+    newTask->next = NULL;
+
+    if (head == NULL) {
+        head = newTask;
+        return;
+    }
+
+    Task* temp = head;
+    while (temp->next != NULL)
+        temp = temp->next;
+
+    temp->next = newTask;
+}
+
+// Display all tasks
+void displayTasks() {
+    Task* temp = head;
+    while (temp != NULL) {
+        cout << temp->name << endl;
+        temp = temp->next;
+    }
+}
+
+int main() {
+    int choice;
+    string task;
+
+    do {
+        cin >> choice;
+        if (choice == 1) {
+            cin >> task;
+            addTask(task);
+        }
+    } while (choice != 0);
+
+    displayTasks();
+    return 0;
+}
+
+/*
+Explanation:
+- To-do list is implemented using a singly linked list.
+- Each node represents a task.
+- addTask() adds a new task at the end of the list.
+- displayTasks() prints all tasks in the to-do list.
+*/

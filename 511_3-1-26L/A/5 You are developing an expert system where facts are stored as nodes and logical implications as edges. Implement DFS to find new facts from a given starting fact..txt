@@ -1,0 +1,56 @@
+# ============================================================
+# Question 5:
+# You are developing an expert system.
+# Facts are nodes and logical implications are edges.
+# Implement DFS to find new facts.
+# ============================================================
+
+
+def dfs_infer_facts(knowledge_base, start_fact, goal_fact=None, visited=None, inferred=None):
+    if visited is None:
+        visited = set()
+    if inferred is None:
+        inferred = []
+
+    visited.add(start_fact)
+    inferred.append(start_fact)
+
+    print("✔ Inferred:", start_fact)
+
+    # Goal check (optional)
+    if goal_fact and start_fact == goal_fact:
+        print("\n🎯 Goal reached:", goal_fact)
+        return True, inferred
+
+    for next_fact in knowledge_base.get(start_fact, []):
+        if next_fact not in visited:
+            found, inferred = dfs_infer_facts(
+                knowledge_base,
+                next_fact,
+                goal_fact,
+                visited,
+                inferred
+            )
+            if found:
+                return True, inferred
+
+    return False, inferred
+
+
+# Knowledge base (facts → implications)
+facts_graph = {
+    "Fever": ["Flu"],
+    "Flu": ["Cold"],
+    "Cold": ["Cough"],
+    "Cough": ["Chest Infection"]
+}
+
+# Run expert system
+found_goal, inferred_facts = dfs_infer_facts(
+    facts_graph,
+    start_fact="Fever",
+    goal_fact="Chest Infection"
+)
+
+print("\n📌 All Inferred Facts:")
+print(inferred_facts)

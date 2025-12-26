@@ -1,0 +1,56 @@
+# ============================================================
+# Question 13:
+# Design an expert system for portfolio management.
+# ============================================================
+
+
+def portfolio_expert_system():
+    print("=" * 50)
+    print("📈 Portfolio Management Expert System")
+    print("=" * 50)
+
+    # Initial portfolio allocation (%)
+    portfolio = {
+        "StockA": 40,
+        "StockB": 30,
+        "StockC": 30
+    }
+
+    # Market trends
+    market_trend = {
+        "StockA": "up",
+        "StockB": "down",
+        "StockC": "up"
+    }
+
+    risk_profile = "medium"  # low / medium / high
+
+    print("\nInitial Portfolio:", portfolio)
+    print("Market Trends:", market_trend)
+    print("Risk Profile:", risk_profile)
+
+    # Expert system rules
+    for stock in portfolio:
+        if market_trend[stock] == "up":
+            if risk_profile == "high":
+                portfolio[stock] += 10
+            else:
+                portfolio[stock] += 5
+
+        elif market_trend[stock] == "down":
+            if risk_profile == "low":
+                portfolio[stock] -= 10
+            else:
+                portfolio[stock] -= 5
+
+    # Normalize portfolio to 100%
+    total = sum(portfolio.values())
+    for stock in portfolio:
+        portfolio[stock] = round((portfolio[stock] / total) * 100, 2)
+
+    print("\n📌 Updated Portfolio Allocation:")
+    for stock, value in portfolio.items():
+        print(f"{stock}: {value}%")
+
+# Run the expert system
+portfolio_expert_system()

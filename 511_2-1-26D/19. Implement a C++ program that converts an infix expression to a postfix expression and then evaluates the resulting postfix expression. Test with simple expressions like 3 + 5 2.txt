@@ -1,0 +1,54 @@
+// Question 19:
+// Convert infix to postfix and evaluate postfix expression.
+
+#include <iostream>
+#include <stack>
+#include <cmath>
+using namespace std;
+
+int prec(char c) {
+    if (c == '+' || c == '-') return 1;
+    if (c == '*' || c == '/') return 2;
+    return 0;
+}
+
+int apply(int a, int b, char op) {
+    if (op == '+') return a + b;
+    if (op == '-') return a - b;
+    if (op == '*') return a * b;
+    return a / b;
+}
+
+int main() {
+    string infix = "3+5*2";
+    stack<char> ops;
+    stack<int> vals;
+
+    for (char c : infix) {
+        if (isdigit(c)) vals.push(c - '0');
+        else {
+            while (!ops.empty() && prec(ops.top()) >= prec(c)) {
+                int b = vals.top(); vals.pop();
+                int a = vals.top(); vals.pop();
+                vals.push(apply(a, b, ops.top()));
+                ops.pop();
+            }
+            ops.push(c);
+        }
+    }
+
+    while (!ops.empty()) {
+        int b = vals.top(); vals.pop();
+        int a = vals.top(); vals.pop();
+        vals.push(apply(a, b, ops.top()));
+        ops.pop();
+    }
+
+    cout << vals.top();
+    return 0;
+}
+
+/*
+Explanation:
+- Infix converted and evaluated using stacks.
+*/

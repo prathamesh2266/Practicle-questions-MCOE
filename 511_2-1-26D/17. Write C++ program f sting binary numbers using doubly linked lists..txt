@@ -1,0 +1,40 @@
+// Question 17:
+// Write C++ program for storing binary numbers using doubly linked lists.
+
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int bit;
+    Node* prev;
+    Node* next;
+};
+
+Node* head = NULL;
+Node* tail = NULL;
+
+void insert(int b) {
+    Node* n = new Node{b, tail, NULL};
+    if (!head) head = n;
+    else tail->next = n;
+    tail = n;
+}
+
+void display() {
+    for (Node* t = head; t; t = t->next)
+        cout << t->bit;
+}
+
+int main() {
+    int n, b;
+    cin >> n;
+    while (n--) { cin >> b; insert(b); }
+    display();
+    return 0;
+}
+
+/*
+Explanation:
+- Each node stores one binary digit.
+- Doubly linked list allows forward/backward traversal.
+*/

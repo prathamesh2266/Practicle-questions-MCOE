@@ -1,0 +1,72 @@
+// Question 42:
+// Implement Dijkstra's Algorithm to find the shortest path from a starting node
+// to all other nodes in the given weighted graph.
+// Find the shortest path from node A to all other nodes and print the distances.
+
+#include <iostream>
+#include <climits>
+using namespace std;
+
+int minDistance(int dist[], bool visited[], int n) {
+    int min = INT_MAX, index = -1;
+    for (int i = 0; i < n; i++) {
+        if (!visited[i] && dist[i] < min) {
+            min = dist[i];
+            index = i;
+        }
+    }
+    return index;
+}
+
+int main() {
+    // Graph represented as adjacency matrix
+    int graph[4][4] = {
+        {0, 4, 2, 0},
+        {4, 0, 5, 10},
+        {2, 5, 0, 3},
+        {0, 10, 3, 0}
+    };
+
+    int n = 4;
+    int dist[4];
+    bool visited[4];
+
+    // Initialize distances
+    for (int i = 0; i < n; i++) {
+        dist[i] = INT_MAX;
+        visited[i] = false;
+    }
+
+    // Start from node A (index 0)
+    dist[0] = 0;
+
+    for (int i = 0; i < n - 1; i++) {
+        int u = minDistance(dist, visited, n);
+        visited[u] = true;
+
+        for (int v = 0; v < n; v++) {
+            if (!visited[v] && graph[u][v] &&
+                dist[u] != INT_MAX &&
+                dist[u] + graph[u][v] < dist[v]) {
+                dist[v] = dist[u] + graph[u][v];
+            }
+        }
+    }
+
+    char nodes[] = {'A', 'B', 'C', 'D'};
+    cout << "Shortest distances from node A:" << endl;
+    for (int i = 0; i < n; i++) {
+        cout << "A -> " << nodes[i] << " = " << dist[i] << endl;
+    }
+
+    return 0;
+}
+
+/*
+Explanation:
+- Graph is represented using adjacency matrix.
+- Dijkstra’s algorithm is applied starting from node A.
+- minDistance() selects the unvisited node with minimum distance.
+- Distances are updated using relaxation technique.
+- Final shortest distances from A to all nodes are printed.
+*/

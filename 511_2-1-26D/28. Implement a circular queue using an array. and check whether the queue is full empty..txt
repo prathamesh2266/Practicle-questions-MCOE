@@ -1,0 +1,26 @@
+// Question 28:
+// Circular queue using array.
+
+#include <iostream>
+using namespace std;
+
+#define N 5
+int q[N], front = -1, rear = -1;
+
+bool isFull() {
+    return (front == (rear + 1) % N);
+}
+
+bool isEmpty() {
+    return front == -1;
+}
+
+int main() {
+    cout << isEmpty() << " " << isFull();
+    return 0;
+}
+
+/*
+Explanation:
+- Circular queue prevents space wastage.
+*/

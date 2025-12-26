@@ -1,0 +1,30 @@
+// Question 26:
+// Implement Kruskal’s Algorithm.
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+struct Edge {
+    char u, v;
+    int w;
+};
+
+int main() {
+    vector<Edge> e = {
+        {'A','B',1},{'C','D',2},{'E','F',2},
+        {'F','G',3},{'A','C',3},{'B','D',4},{'E','G',5}
+    };
+
+    sort(e.begin(), e.end(), [](Edge a, Edge b){ return a.w < b.w; });
+
+    for (auto x : e)
+        cout << x.u << "-" << x.v << " ";
+    return 0;
+}
+
+/*
+Explanation:
+- Edges sorted by weight.
+*/

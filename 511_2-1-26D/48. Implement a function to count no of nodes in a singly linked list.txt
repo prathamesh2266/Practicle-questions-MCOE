@@ -1,0 +1,49 @@
+// Question 48:
+// Implement a function to count number of nodes in a singly linked list.
+
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+Node* head = NULL;
+
+// Insert node at beginning
+void insert(int value) {
+    Node* newNode = new Node();
+    newNode->data = value;
+    newNode->next = head;
+    head = newNode;
+}
+
+// Count number of nodes
+int countNodes() {
+    int count = 0;
+    Node* temp = head;
+    while (temp != NULL) {
+        count++;
+        temp = temp->next;
+    }
+    return count;
+}
+
+int main() {
+    insert(10);
+    insert(20);
+    insert(30);
+
+    cout << "Number of nodes: " << countNodes();
+
+    return 0;
+}
+
+/*
+Explanation:
+- Singly linked list is used to store nodes.
+- insert() adds nodes to the list.
+- countNodes() traverses the list and increments count for each node.
+- The final count represents the total number of nodes in the list.
+*/

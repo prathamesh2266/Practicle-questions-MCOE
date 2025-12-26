@@ -1,0 +1,52 @@
+# ============================================================
+# Question 14:
+# Develop an elementary Airline Booking Chatbot.
+# ============================================================
+
+
+
+def airline_chatbot():
+    print("=" * 50)
+    print("✈️ Welcome to SkyWays Airline Chatbot")
+    print("=" * 50)
+
+    booking_confirmed = False
+
+    while True:
+        print("\nPlease choose an option:")
+        print("1. Book a Flight")
+        print("2. Cancel Booking")
+        print("3. Check Flight Status")
+        print("4. Exit")
+
+        choice = input("Enter your choice (1-4): ")
+
+        if choice == "1":
+            name = input("Enter passenger name: ")
+            destination = input("Enter destination: ")
+            booking_confirmed = True
+            print(f"\n✅ Flight booked successfully for {name} to {destination}.")
+
+        elif choice == "2":
+            if booking_confirmed:
+                booking_confirmed = False
+                print("\n❌ Your flight booking has been cancelled.")
+            else:
+                print("\n⚠️ No active booking found.")
+
+        elif choice == "3":
+            if booking_confirmed:
+                print("\n🛫 Your flight is scheduled and on time.")
+            else:
+                print("\n⚠️ No booking available to check status.")
+
+        elif choice == "4":
+            print("\n🙏 Thank you for choosing SkyWays Airline.")
+            print("Have a pleasant journey!")
+            break
+
+        else:
+            print("\n❌ Invalid option. Please select 1–4.")
+
+# Run chatbot
+airline_chatbot()

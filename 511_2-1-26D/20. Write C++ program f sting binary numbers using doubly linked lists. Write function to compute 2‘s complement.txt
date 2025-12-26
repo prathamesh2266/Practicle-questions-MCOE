@@ -1,0 +1,50 @@
+// Question 20:
+// Write C++ program to compute 2’s complement using doubly linked list.
+
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int bit;
+    Node* prev;
+    Node* next;
+};
+
+Node* head = NULL;
+Node* tail = NULL;
+
+void insert(int b) {
+    Node* n = new Node{b, tail, NULL};
+    if (!head) head = n;
+    else tail->next = n;
+    tail = n;
+}
+
+void twosComplement() {
+    Node* t = tail;
+    while (t && t->bit == 0) t = t->prev;
+    if (t) t = t->prev;
+    while (t) {
+        t->bit = (t->bit == 0) ? 1 : 0;
+        t = t->prev;
+    }
+}
+
+void display() {
+    for (Node* t = head; t; t = t->next)
+        cout << t->bit;
+}
+
+int main() {
+    int n, b;
+    cin >> n;
+    while (n--) { cin >> b; insert(b); }
+    twosComplement();
+    display();
+    return 0;
+}
+
+/*
+Explanation:
+- Find first 1 from right, flip remaining bits.
+*/

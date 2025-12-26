@@ -1,0 +1,71 @@
+// Question 32:
+// Create a program to manage a library system where books are represented as
+// nodes in a linked list. Include operations to add records.
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+struct Book {
+    int id;
+    string title;
+    string author;
+    Book* next;
+};
+
+Book* head = NULL;
+
+// Add book record at end
+void addBook(int id, string title, string author) {
+    Book* newBook = new Book();
+    newBook->id = id;
+    newBook->title = title;
+    newBook->author = author;
+    newBook->next = NULL;
+
+    if (head == NULL) {
+        head = newBook;
+        return;
+    }
+
+    Book* temp = head;
+    while (temp->next != NULL)
+        temp = temp->next;
+
+    temp->next = newBook;
+}
+
+// Display all books
+void displayBooks() {
+    Book* temp = head;
+    while (temp != NULL) {
+        cout << temp->id << " "
+             << temp->title << " "
+             << temp->author << endl;
+        temp = temp->next;
+    }
+}
+
+int main() {
+    int id, choice;
+    string title, author;
+
+    do {
+        cin >> choice;
+        if (choice == 1) {
+            cin >> id >> title >> author;
+            addBook(id, title, author);
+        }
+    } while (choice != 0);
+
+    displayBooks();
+    return 0;
+}
+
+/*
+Explanation:
+- Library books are stored as nodes in a singly linked list.
+- Each node contains Book ID, Title, Author, and next pointer.
+- addBook() inserts a new book record at the end of the list.
+- displayBooks() prints all stored book records.
+*/

@@ -1,0 +1,38 @@
+# ============================================================
+# Question 9:
+# Chess shortest path using A* (simplified king movement).
+# ============================================================
+
+import heapq
+
+def heuristic(pos, goal):
+    return max(abs(pos[0]-goal[0]), abs(pos[1]-goal[1]))
+
+def astar_king(start, goal):
+    pq = [(heuristic(start, goal), 0, start, [start])]
+    visited = set()
+
+    while pq:
+        _, cost, pos, path = heapq.heappop(pq)
+
+        if pos == goal:
+            return path
+
+        if pos in visited:
+            continue
+        visited.add(pos)
+
+        for dx in [-1,0,1]:
+            for dy in [-1,0,1]:
+                if dx != 0 or dy != 0:
+                    nx, ny = pos[0]+dx, pos[1]+dy
+                    if 0 <= nx < 8 and 0 <= ny < 8:
+                        heapq.heappush(
+                            pq,
+                            (cost + heuristic((nx,ny), goal),
+                             cost + 1,
+                             (nx,ny),
+                             path + [(nx,ny)])
+                        )
+
+print(astar_king((0,0), (7,7)))

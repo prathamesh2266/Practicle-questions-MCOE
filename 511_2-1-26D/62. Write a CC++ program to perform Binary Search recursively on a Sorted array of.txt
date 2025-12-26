@@ -1,0 +1,51 @@
+// Question 62:
+// Write a C++ program to perform Binary Search recursively on a sorted array of integers.
+// The program should return the index of the element if found,
+// otherwise print "Element not found".
+
+#include <iostream>
+using namespace std;
+
+int binarySearch(int arr[], int left, int right, int key) {
+    if (left > right)
+        return -1;
+
+    int mid = left + (right - left) / 2;
+
+    if (arr[mid] == key)
+        return mid;
+    else if (key < arr[mid])
+        return binarySearch(arr, left, mid - 1, key);
+    else
+        return binarySearch(arr, mid + 1, right, key);
+}
+
+int main() {
+    int n;
+    cin >> n;
+
+    int arr[100];
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+
+    int key;
+    cin >> key;
+
+    int result = binarySearch(arr, 0, n - 1, key);
+
+    if (result == -1)
+        cout << "Element not found";
+    else
+        cout << "Element found at index " << result;
+
+    return 0;
+}
+
+/*
+Explanation:
+- Binary search is applied on a sorted array.
+- The search space is reduced by half in each recursive call.
+- If the element is found, its index is returned.
+- If not found, -1 is returned and "Element not found" is printed.
+*/

@@ -1,0 +1,39 @@
+// Question 22:
+// Implement queue using linked list to store friends’ names.
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+struct Node {
+    string name;
+    Node* next;
+};
+
+Node* front = NULL;
+Node* rear = NULL;
+
+void enqueue(string s) {
+    Node* n = new Node{s, NULL};
+    if (!rear) front = rear = n;
+    else { rear->next = n; rear = n; }
+}
+
+void dequeue() {
+    if (!front) return;
+    Node* t = front;
+    front = front->next;
+    delete t;
+}
+
+int main() {
+    enqueue("A");
+    enqueue("B");
+    dequeue();
+    return 0;
+}
+
+/*
+Explanation:
+- Queue uses front and rear pointers.
+*/

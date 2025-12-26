@@ -1,0 +1,80 @@
+// Question 14:
+// Write a C++ program for storing binary numbers using singly linked lists.
+// Write function to add two binary numbers.
+
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int bit;
+    Node* next;
+};
+
+Node* insert(Node* head, int b) {
+    Node* newNode = new Node();
+    newNode->bit = b;
+    newNode->next = NULL;
+
+    if (head == NULL)
+        return newNode;
+
+    Node* temp = head;
+    while (temp->next != NULL)
+        temp = temp->next;
+
+    temp->next = newNode;
+    return head;
+}
+
+Node* addBinary(Node* a, Node* b) {
+    Node* result = NULL;
+    int carry = 0;
+
+    while (a != NULL || b != NULL || carry) {
+        int sum = carry;
+        if (a) { sum += a->bit; a = a->next; }
+        if (b) { sum += b->bit; b = b->next; }
+
+        result = insert(result, sum % 2);
+        carry = sum / 2;
+    }
+    return result;
+}
+
+void display(Node* head) {
+    while (head != NULL) {
+        cout << head->bit;
+        head = head->next;
+    }
+}
+
+int main() {
+    Node* b1 = NULL;
+    Node* b2 = NULL;
+
+    int n1, n2, bit;
+    cin >> n1;
+    for (int i = 0; i < n1; i++) {
+        cin >> bit;
+        b1 = insert(b1, bit);
+    }
+
+    cin >> n2;
+    for (int i = 0; i < n2; i++) {
+        cin >> bit;
+        b2 = insert(b2, bit);
+    }
+
+    Node* sum = addBinary(b1, b2);
+    display(sum);
+
+    return 0;
+}
+
+/*
+Explanation:
+- Binary numbers are stored using singly linked lists.
+- Each node stores one binary digit.
+- Binary addition is done bit by bit with carry.
+- The resultant binary number is stored in a new linked list and displayed.
+*/

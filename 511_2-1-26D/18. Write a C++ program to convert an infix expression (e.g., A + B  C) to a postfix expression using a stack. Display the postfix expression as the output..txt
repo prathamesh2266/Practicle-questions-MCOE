@@ -1,0 +1,43 @@
+// Question 18:
+// Convert infix expression to postfix using stack.
+
+#include <iostream>
+#include <stack>
+using namespace std;
+
+int prec(char c) {
+    if (c == '+' || c == '-') return 1;
+    if (c == '*' || c == '/') return 2;
+    return 0;
+}
+
+int main() {
+    string infix;
+    cin >> infix;
+    stack<char> st;
+    string postfix = "";
+
+    for (char c : infix) {
+        if (isalnum(c)) postfix += c;
+        else {
+            while (!st.empty() && prec(st.top()) >= prec(c)) {
+                postfix += st.top();
+                st.pop();
+            }
+            st.push(c);
+        }
+    }
+    while (!st.empty()) {
+        postfix += st.top();
+        st.pop();
+    }
+
+    cout << postfix;
+    return 0;
+}
+
+/*
+Explanation:
+- Stack handles operators.
+- Output is postfix expression.
+*/

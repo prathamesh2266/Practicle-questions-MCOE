@@ -1,0 +1,49 @@
+// Question 52:
+// Write a program that uses a stack to check whether parentheses in a given expression
+// are balanced. The expression can include (), {}, and [].
+
+#include <iostream>
+#include <stack>
+using namespace std;
+
+bool isMatching(char open, char close) {
+    if (open == '(' && close == ')') return true;
+    if (open == '{' && close == '}') return true;
+    if (open == '[' && close == ']') return true;
+    return false;
+}
+
+int main() {
+    string expr;
+    cin >> expr;
+
+    stack<char> st;
+
+    for (char ch : expr) {
+        if (ch == '(' || ch == '{' || ch == '[') {
+            st.push(ch);
+        } else if (ch == ')' || ch == '}' || ch == ']') {
+            if (st.empty() || !isMatching(st.top(), ch)) {
+                cout << "Not Balanced";
+                return 0;
+            }
+            st.pop();
+        }
+    }
+
+    if (st.empty())
+        cout << "Balanced";
+    else
+        cout << "Not Balanced";
+
+    return 0;
+}
+
+/*
+Explanation:
+- A stack is used to store opening brackets.
+- When an opening bracket is found, it is pushed onto the stack.
+- When a closing bracket is found, the top of the stack is checked.
+- If brackets do not match or stack is empty, expression is not balanced.
+- If stack is empty at the end, the expression is balanced.
+*/

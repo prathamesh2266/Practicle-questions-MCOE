@@ -1,0 +1,52 @@
+# ============================================================
+# Question 16:
+# Develop an elementary College Admission Chatbot.
+# ============================================================
+
+
+
+def college_admission_chatbot():
+    print("=" * 50)
+    print("🎓 Welcome to ABC College Admission Chatbot")
+    print("=" * 50)
+
+    while True:
+        print("\nPlease choose an option:")
+        print("1. Admission Information")
+        print("2. Available Courses")
+        print("3. Eligibility Criteria")
+        print("4. Application Status")
+        print("5. Exit")
+
+        choice = input("Enter your choice (1-5): ")
+
+        if choice == "1":
+            print("\n📢 Admissions are currently OPEN.")
+            print("Apply online at: www.abccollege.edu/apply")
+
+        elif choice == "2":
+            print("\n📚 Available Courses:")
+            print("- Engineering")
+            print("- Science")
+            print("- Arts")
+            print("- Commerce")
+
+        elif choice == "3":
+            print("\n✅ Eligibility Criteria:")
+            print("- Minimum 60% in previous qualification")
+            print("- Entrance exam required for Engineering")
+
+        elif choice == "4":
+            app_id = input("Enter your Application ID: ")
+            print(f"\n📄 Application ID {app_id} is under review.")
+
+        elif choice == "5":
+            print("\n🙏 Thank you for contacting ABC College.")
+            print("Best wishes for your future!")
+            break
+
+        else:
+            print("\n❌ Invalid option. Please select 1–5.")
+
+# Run chatbot
+college_admission_chatbot()

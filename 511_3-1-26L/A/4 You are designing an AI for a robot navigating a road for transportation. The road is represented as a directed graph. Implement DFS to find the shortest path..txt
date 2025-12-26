@@ -1,0 +1,30 @@
+# ============================================================
+# Question 4:
+# You are designing an AI for a robot navigating a road.
+# The road is represented as a directed graph.
+# Implement DFS algorithm to find the shortest path.
+# ============================================================
+
+def dfs_shortest(graph, start, goal, path=None, shortest=None):
+    if path is None:
+        path = [start]
+
+    if start == goal:
+        return path
+
+    for neighbor in graph.get(start, []):
+        if neighbor not in path:
+            new_path = dfs_shortest(graph, neighbor, goal, path + [neighbor], shortest)
+            if new_path:
+                if shortest is None or len(new_path) < len(shortest):
+                    shortest = new_path
+    return shortest
+
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D'],
+    'C': ['D'],
+    'D': []
+}
+
+print(dfs_shortest(graph, 'A', 'D'))

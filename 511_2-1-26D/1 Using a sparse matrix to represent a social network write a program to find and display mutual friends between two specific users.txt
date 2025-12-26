@@ -1,0 +1,55 @@
+// Question 1:
+// Using a sparse matrix to represent a social network, write a program to find and display
+// mutual friends between two specific users.
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int users, connections;
+    cin >> users >> connections;
+
+    // Sparse matrix representation using three arrays
+    // row[i] -> user who has a friend
+    // col[i] -> friend of that user
+    // val[i] -> connection value (1 means friends)
+    int row[100], col[100], val[100];
+
+    // Input sparse matrix data
+    for (int i = 0; i < connections; i++) {
+        cin >> row[i] >> col[i] >> val[i];
+    }
+
+    int u1, u2;
+    cin >> u1 >> u2;
+
+    cout << "Mutual Friends: ";
+    bool found = false;
+
+    // Find common friends of u1 and u2
+    for (int i = 0; i < connections; i++) {
+        if (row[i] == u1 && val[i] == 1) {
+            for (int j = 0; j < connections; j++) {
+                if (row[j] == u2 && col[j] == col[i] && val[j] == 1) {
+                    cout << col[i] << " ";
+                    found = true;
+                }
+            }
+        }
+    }
+
+    if (!found)
+        cout << "None";
+
+    return 0;
+}
+
+/*
+Explanation:
+- The social network is represented using a sparse matrix format (row, column, value).
+- Each entry with value = 1 indicates a friendship between row[user] and col[friend].
+- The program takes two users (u1 and u2).
+- It scans all friends of u1 and checks if the same friend also appears for u2.
+- If a common friend is found, it is printed as a mutual friend.
+- If no common friends exist, "None" is displayed.
+*/

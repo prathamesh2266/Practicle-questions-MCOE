@@ -1,0 +1,37 @@
+// Question 11:
+// Write a program to represent friendships in a social network using a sparse matrix.
+// Display only the non-zero entries (friend connections).
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int users, nonZero;
+    cin >> users >> nonZero;
+
+    // Sparse matrix representation: row, column, value
+    int row[100], col[100], val[100];
+
+    for (int i = 0; i < nonZero; i++) {
+        cin >> row[i] >> col[i] >> val[i];
+    }
+
+    cout << "Friend Connections (Non-Zero Entries):" << endl;
+
+    for (int i = 0; i < nonZero; i++) {
+        if (val[i] != 0) {
+            cout << "User " << row[i]
+                 << " is friend with User " << col[i] << endl;
+        }
+    }
+
+    return 0;
+}
+
+/*
+Explanation:
+- Social network is represented using sparse matrix format (row, column, value).
+- Each non-zero value represents a friendship between two users.
+- Only non-zero entries are displayed.
+- This saves memory compared to a full adjacency matrix.
+*/

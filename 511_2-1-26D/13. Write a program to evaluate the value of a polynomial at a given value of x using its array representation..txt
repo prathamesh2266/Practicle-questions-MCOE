@@ -1,0 +1,42 @@
+// Question 13:
+// Write a program to evaluate the value of a polynomial
+// at a given value of x using its array representation.
+
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+struct Term {
+    int coeff;
+    int power;
+};
+
+int main() {
+    int n;
+    cin >> n;
+
+    Term poly[50];
+    for (int i = 0; i < n; i++) {
+        cin >> poly[i].coeff >> poly[i].power;
+    }
+
+    int x;
+    cin >> x;
+
+    int result = 0;
+    for (int i = 0; i < n; i++) {
+        result += poly[i].coeff * pow(x, poly[i].power);
+    }
+
+    cout << "Result = " << result;
+
+    return 0;
+}
+
+/*
+Explanation:
+- Polynomial is stored using an array of structures.
+- Each structure contains coefficient and power.
+- Given value of x is substituted in the polynomial.
+- Each term is evaluated and added to get final result.
+*/

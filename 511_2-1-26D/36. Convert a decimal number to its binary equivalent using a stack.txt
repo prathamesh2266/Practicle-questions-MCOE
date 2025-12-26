@@ -1,0 +1,38 @@
+// Question 36:
+// Convert a decimal number to its binary equivalent using a stack.
+
+#include <iostream>
+#include <stack>
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+
+    stack<int> st;
+
+    if (n == 0) {
+        cout << 0;
+        return 0;
+    }
+
+    while (n > 0) {
+        st.push(n % 2);
+        n = n / 2;
+    }
+
+    while (!st.empty()) {
+        cout << st.top();
+        st.pop();
+    }
+
+    return 0;
+}
+
+/*
+Explanation:
+- The decimal number is repeatedly divided by 2.
+- The remainder at each step is pushed onto the stack.
+- The stack reverses the order to produce the correct binary representation.
+- Finally, all elements are popped from the stack and printed as the binary number.
+*/

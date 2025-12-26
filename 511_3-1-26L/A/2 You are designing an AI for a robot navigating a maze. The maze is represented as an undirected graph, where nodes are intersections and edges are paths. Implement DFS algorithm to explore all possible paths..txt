@@ -1,0 +1,29 @@
+# ============================================================
+# Question 2:
+# You are designing an AI for a robot navigating a maze.
+# The maze is represented as an undirected graph.
+# Implement DFS algorithm to explore all possible paths.
+# ============================================================
+
+def dfs_all_paths(graph, start, goal, path=None):
+    if path is None:
+        path = [start]
+
+    if start == goal:
+        print(path)
+        return
+
+    for neighbor in graph[start]:
+        if neighbor not in path:
+            dfs_all_paths(graph, neighbor, goal, path + [neighbor])
+
+graph = {
+    'A': ['B', 'C'],
+    'B': ['A', 'D', 'E'],
+    'C': ['A', 'F'],
+    'D': ['B'],
+    'E': ['B', 'F'],
+    'F': ['C', 'E']
+}
+
+dfs_all_paths(graph, 'A', 'F')

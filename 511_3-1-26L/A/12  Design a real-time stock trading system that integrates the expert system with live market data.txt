@@ -1,0 +1,49 @@
+# ============================================================
+# Question 12:
+# Design a real-time stock trading system (simulated).
+# ============================================================
+
+import random
+import time
+
+# Initial values
+price = 100
+balance = 1000   # virtual money
+shares = 0
+
+print("=" * 50)
+print("📊 Real-Time Stock Trading System (Simulation)")
+print("=" * 50)
+
+for minute in range(1, 11):
+    change = random.randint(-5, 5)
+    price += change
+
+    print(f"\n⏱️ Time {minute}")
+    print("Live Stock Price:", price)
+
+    # Trading rules (expert system)
+    if change > 2 and balance >= price:
+        shares += 1
+        balance -= price
+        decision = "BUY"
+    elif change < -2 and shares > 0:
+        shares -= 1
+        balance += price
+        decision = "SELL"
+    else:
+        decision = "HOLD"
+
+    print("Decision:", decision)
+    print("Shares Owned:", shares)
+    print("Balance:", balance)
+
+    time.sleep(1)  # simulate real-time delay
+
+# Final portfolio value
+total_value = balance + (shares * price)
+
+print("\n" + "=" * 50)
+print("📌 Trading Session Ended")
+print("Final Stock Price:", price)
+print("Total Portfolio Value:", total_value)

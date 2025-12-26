@@ -1,0 +1,29 @@
+// Question 24:
+// Evaluate postfix expression using stack.
+
+#include <iostream>
+#include <stack>
+using namespace std;
+
+int main() {
+    string post = "352*+";
+    stack<int> st;
+
+    for (char c : post) {
+        if (isdigit(c)) st.push(c - '0');
+        else {
+            int b = st.top(); st.pop();
+            int a = st.top(); st.pop();
+            if (c == '+') st.push(a + b);
+            if (c == '*') st.push(a * b);
+        }
+    }
+
+    cout << st.top();
+    return 0;
+}
+
+/*
+Explanation:
+- Stack evaluates postfix expression.
+*/

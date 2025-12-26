@@ -1,0 +1,90 @@
+// Question 2:
+// Write a C++ program to maintain club members’ information using singly linked lists.
+// Store student PRN, Name and A.Y.
+// Write functions to add the members as well as both coordinators.
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+struct Node {
+    int prn;
+    string name;
+    string ay;
+    string role; // Member / Coordinator
+    Node* next;
+};
+
+Node* head = NULL;
+
+// Add coordinator at beginning
+void addCoordinator(int prn, string name, string ay) {
+    Node* newNode = new Node();
+    newNode->prn = prn;
+    newNode->name = name;
+    newNode->ay = ay;
+    newNode->role = "Coordinator";
+    newNode->next = head;
+    head = newNode;
+}
+
+// Add member at end
+void addMember(int prn, string name, string ay) {
+    Node* newNode = new Node();
+    newNode->prn = prn;
+    newNode->name = name;
+    newNode->ay = ay;
+    newNode->role = "Member";
+    newNode->next = NULL;
+
+    if (head == NULL) {
+        head = newNode;
+        return;
+    }
+
+    Node* temp = head;
+    while (temp->next != NULL)
+        temp = temp->next;
+
+    temp->next = newNode;
+}
+
+// Display list
+void display() {
+    Node* temp = head;
+    while (temp != NULL) {
+        cout << temp->prn << " "
+             << temp->name << " "
+             << temp->ay << " "
+             << temp->role << endl;
+        temp = temp->next;
+    }
+}
+
+int main() {
+    int prn, choice;
+    string name, ay;
+
+    do {
+        cin >> choice;
+        if (choice == 1) {
+            cin >> prn >> name >> ay;
+            addCoordinator(prn, name, ay);
+        } else if (choice == 2) {
+            cin >> prn >> name >> ay;
+            addMember(prn, name, ay);
+        }
+    } while (choice != 0);
+
+    display();
+    return 0;
+}
+
+/*
+Explanation:
+- Singly linked list is used to store club member information.
+- Each node stores PRN, Name, Academic Year, Role, and next pointer.
+- Coordinators are added at the beginning of the list.
+- Members are added at the end of the list.
+- Display function prints all club members in order.
+*/

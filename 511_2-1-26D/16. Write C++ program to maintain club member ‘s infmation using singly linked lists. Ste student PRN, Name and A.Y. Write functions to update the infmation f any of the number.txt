@@ -1,0 +1,48 @@
+// Question 16:
+// Write C++ program to maintain club members’ information using singly linked lists.
+// Store student PRN, Name and A.Y.
+// Write functions to update the information of any member.
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+struct Node {
+    int prn;
+    string name, ay;
+    Node* next;
+};
+
+Node* head = NULL;
+
+void addMember(int prn, string name, string ay) {
+    Node* n = new Node{prn, name, ay, NULL};
+    if (!head) { head = n; return; }
+    Node* t = head;
+    while (t->next) t = t->next;
+    t->next = n;
+}
+
+void updateMember(int prn, string name, string ay) {
+    Node* t = head;
+    while (t) {
+        if (t->prn == prn) {
+            t->name = name;
+            t->ay = ay;
+            return;
+        }
+        t = t->next;
+    }
+}
+
+int main() {
+    addMember(1, "A", "FY");
+    updateMember(1, "B", "SY");
+    return 0;
+}
+
+/*
+Explanation:
+- Singly linked list stores PRN, Name, A.Y.
+- updateMember searches by PRN and updates details.
+*/

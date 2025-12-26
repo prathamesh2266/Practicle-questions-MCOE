@@ -1,0 +1,43 @@
+// Question 58:
+// Develop a program to sort product names alphabetically using Bubble Sort.
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+
+    string products[50];
+
+    for (int i = 0; i < n; i++) {
+        cin >> products[i];
+    }
+
+    // Bubble Sort for strings
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (products[j] > products[j + 1]) {
+                string temp = products[j];
+                products[j] = products[j + 1];
+                products[j + 1] = temp;
+            }
+        }
+    }
+
+    cout << "Sorted Product Names:" << endl;
+    for (int i = 0; i < n; i++) {
+        cout << products[i] << endl;
+    }
+
+    return 0;
+}
+
+/*
+Explanation:
+- Product names are stored in an array of strings.
+- Bubble Sort is applied by comparing adjacent strings.
+- If the current string is lexicographically greater, swapping is done.
+- After sorting, product names are displayed in alphabetical order.
+*/

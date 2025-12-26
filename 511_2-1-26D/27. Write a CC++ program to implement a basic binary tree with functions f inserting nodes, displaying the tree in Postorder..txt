@@ -1,0 +1,31 @@
+// Question 27:
+// Binary tree with postorder traversal.
+
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* left;
+    Node* right;
+};
+
+void postorder(Node* r) {
+    if (!r) return;
+    postorder(r->left);
+    postorder(r->right);
+    cout << r->data << " ";
+}
+
+int main() {
+    Node* root = new Node{1, NULL, NULL};
+    root->left = new Node{2, NULL, NULL};
+    root->right = new Node{3, NULL, NULL};
+    postorder(root);
+    return 0;
+}
+
+/*
+Explanation:
+- Postorder = Left Right Root.
+*/

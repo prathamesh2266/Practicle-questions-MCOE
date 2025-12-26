@@ -1,0 +1,23 @@
+// Question 23:
+// Simulate job scheduling using queue.
+
+#include <iostream>
+#include <queue>
+using namespace std;
+
+int main() {
+    queue<string> q;
+    q.push("Job1");
+    q.push("Job2");
+
+    while (!q.empty()) {
+        cout << q.front() << " ";
+        q.pop();
+    }
+    return 0;
+}
+
+/*
+Explanation:
+- FIFO job scheduling using queue.
+*/

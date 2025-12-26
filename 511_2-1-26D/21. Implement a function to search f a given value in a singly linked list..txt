@@ -1,0 +1,37 @@
+// Question 21:
+// Search a value in singly linked list.
+
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+Node* head = NULL;
+
+void insert(int x) {
+    Node* n = new Node{x, head};
+    head = n;
+}
+
+bool search(int x) {
+    Node* t = head;
+    while (t) {
+        if (t->data == x) return true;
+        t = t->next;
+    }
+    return false;
+}
+
+int main() {
+    insert(10);
+    cout << search(10);
+    return 0;
+}
+
+/*
+Explanation:
+- Linear traversal to find value.
+*/
